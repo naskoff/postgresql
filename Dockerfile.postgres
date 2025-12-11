@@ -1,5 +1,7 @@
 FROM postgres:17.7-alpine
 
+RUN apk add --no-cache make perl pgbadger
+
 COPY postgres.conf /etc/postgresql/postgresql.conf
 
 COPY entrypoint.sh /docker-entrypoint-initdb.d/99-create-extension.sh

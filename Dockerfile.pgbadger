@@ -1,0 +1,18 @@
+ARG ALPINE_VERSION=3.23.0
+
+FROM alpine:${ALPINE_VERSION}
+
+ARG PGBADGER_VERSION=13.1
+
+RUN apk add --no-cache perl make
+
+RUN wget https://github.com/darold/pgbadger/archive/refs/tags/v${PGBADGER_VERSION}.tar.gz && \
+    tar xzf v${PGBADGER_VERSION}.tar.gz
+
+RUN cd pgbadger-${PGBADGER_VERSION} && perl Makefile.PL
+RUN cd pgbadger-${PGBADGER_VERSION} && make install
+RUN pgbadger --version
+
+CMD ["--help"]
+
+ENTRYPOINT ["pgbadger"]

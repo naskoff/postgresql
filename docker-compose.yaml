@@ -4,6 +4,7 @@ services:
     restart: unless-stopped
     build:
       context: .
+      dockerfile: Dockerfile.postgres
     ports:
       - ${FORWARD_DB_PORT:-5432}:5432
     volumes:
